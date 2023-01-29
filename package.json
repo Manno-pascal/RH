@@ -1,13 +1,13 @@
 {
   "name": "apiuser",
   "version": "1.0.0",
-  "description": "ce projet est magnifique",
+  "description": "Projet RH",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "thomas oliver",
+  "author": "pascal mannoni",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",

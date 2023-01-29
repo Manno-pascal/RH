@@ -13,11 +13,11 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(userRouter)
 
-app.listen(3000,(err)=>{
+app.listen(process.env.PORT,(err)=>{
     if (err) {
        console.log(err); 
     }else{
-        console.log('Je suis connecté');
+        console.log('Server started on port '+process.env.PORT);
     }
 })
 
@@ -26,7 +26,7 @@ mongoose.connect(db,(err)=>{
     if (err) {
         console.log(err);
     }else{
-        console.log("connecter a la bdd");
+        console.log("MongoDB connected");
     }
 })
 

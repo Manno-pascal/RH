@@ -1,19 +1,35 @@
 {% extends "main.twig" %}
 
-{% block style %}
-	<link rel="stylesheet" href="/css/addWorker.css">
-
-{% endblock %}
 {% block header %}
-	<h1>{{ id == "newUser" ? "Ajouter" : "Editer"}} un employé</h1>
+	<h1>{{ id == "newUser" ? "Ajouter" : "Editer"}}
+		un employé</h1>
 {% endblock %}
 
 {% block main %}
-	<form   action={{ id == "newUser" ? "/addWorker" : "/edit/" ~ id}} method="POST" enctype="multipart/form-data">
-		<input type="text" id="name" name="name" placeholder="Nom de l'employé" {{ id == "newUser" ? 'required' : "" }} value={{ id == "newUser" ? '' :  worker.name }}>
-		<input type="file" id="picture" name="picture" {{ id == "newUser" ? "required" : "" }}>
-		<input type="text" id="position" name="position" placeholder="Poste de l'employé" {{ id == "newUser" ? "required" : ""}} value={{ id == "newUser" ? '' :  worker.position  }}>
-		<input type="number" id="warningNumber" name="warningNumber" placeholder="Nombre de blame" {{ id == "newUser" ? "required" : ""}} value={{id == "newUser" ? '' :  worker.warningNumber }}>
-		<button type="submit">valider</button>
-	</form>
-{% endblock %}
+	<form action={{ id == "newUser" ? "/addWorker" : "/edit/" ~ id}} method="POST" enctype="multipart/form-data">
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="name">Nom du salarié</label>
+				<input class="form-control" type="text" id="name" name="name" placeholder="Nom de l'employé" {{ id == "newUser" ? 'required' : "" }} value={{ id == "newUser" ? '' : worker.name }}>
+			</div>
+			<div class="form-group col-md-6">
+				<label for="position">Poste de l'employé</label>
+				<input type="text" class="form-control" name="position" placeholder="Poste de l'employé" {{ id == "newUser" ? "required" : ""}} value={{ id == "newUser" ? '' : worker.position }}>
+			</div>
+			<div class="form-group">
+				<label for="warningNumber">Nombre de blâme</label>
+				<select class="form-select" id="warningNumber" name="warningNumber" {{ id == "newUser" ? "required" : "" }}>
+					<option selected>{{id == "newUser" ? 0 : worker.warningNumber }}</option>
+					<option value=0>0</option>
+					<option value=1>1</option>
+					<option value=2>2</option>
+					<option value=3>3</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="picture">Photo de l'employé</label>
+				<input type="file" class="form-control-file" id="picture" name="picture" {{ id == "newUser" ? "required" : "" }}>
+			</div>
+			<button type="submit" class="btn btn-primary">Valider</button>
+		</form>
+	{% endblock %}

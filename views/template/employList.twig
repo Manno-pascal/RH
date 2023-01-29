@@ -4,34 +4,73 @@
 {% endblock %}
 
 {% block main %}
-<a href="/disconnect">Déconnexion</a>
-	<div class="container">
-		<div class='row'>
+	<div class="row d-flex justify-content-around">
+		<form class="col-lg-2" action="/edit/newUser" method="GET">
+			<button type="submit" class="btn btn-primary col-lg-12">Ajouter un employé</button>
+		</form>
+		<form class="col-lg-2" action="/disconnect" method="GET">
+			<button type="submit" class="btn btn-primary col-lg-12">Se déconnecter</button>
+		</form>
+	</div>
 
-			{% for worker in workers %}
-				<div id="carte">
-					<p>Employé :{{worker.name}}</p>
-					<p>Photo :</p>
-					<img src="./images/{{worker.picture}}" alt="">
-					<p>Poste :{{worker.position}}</p>
-					<p>Nombre de blame :{{worker.warningNumber}}</p>
-					<div class="buttons">
-						<a href="/addBlame/{{worker._id}}">BLAMER !</a>
-						<div onclick="confirm()">Supprimer utilisateur</div>
-						<a class="choice" href="/edit/{{worker._id}}">Editer l'utilisateur</a>
+	<div class="container-fluid m-5 ">
+		{% for worker in workers %}
+			<div class="card p-1 mb-2">
+				<div class='row'>
+					<p class="col-lg-3">Employé :
+						{{worker.name}}</p>
+
+					<p class="col-lg-3">Poste :
+						{{worker.position}}</p>
+					<p class="col-lg-3">Nombre de blame :
+						{{worker.warningNumber}}</p>
+
+					<img class="col-lg-1" src="./images/{{worker.picture}}" alt="">
+
+					<div class="row d-flex justify-content-around mt-3">
+						<form class="col-lg-3" action="/addBlame/{{worker._id}}" method="GET">
+							<button type="submit" class="btn btn-primary col-lg-12">BLAMER CE DISSIDENT</button>
+						</form>
+						<button type="button" class="btn btn-primary col-lg-3" data-bs-toggle="modal" data-bs-target="#modal_{{worker._id}}">
+							Supprimer
+							{{worker.name}}
+						</button>
+						<form class="col-lg-3" action="/edit/{{worker._id}}" method="GET">
+							<button type="submit" class="btn btn-primary col-lg-12">Editer
+								{{worker.name}}</button>
+						</form>
 					</div>
 
 
-				</form>
-			</div>
-			<div id="modal" class="displayModal" onclick="confirm">
-				<p>Voulez-vous confirmer le ban ?</p>
-				<a class="choice" href="/delete/{{worker._id}}">
-					OUI</a>
-				<p onclick="confirm()" class="choice">NON</p>
+				</div>
+
+				<div class="modal fade" id="modal_{{worker._id}}" tabindex="-1" aria-labelledby="modal_{{worker._id}}" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h1 class="modal-title fs-5" id="modal_{{worker._id}}">Suppression de
+									{{worker.name}}</h1>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								Voulez-vous vraiment bannir
+								{{worker.name}}
+								?
+							</div>
+							<div class="modal-footer">
+
+								<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Non</button>
+								<form action="/delete/{{worker._id}}" method="GET">
+									<button type="submit" class="btn btn-success">Bannir</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		{% endfor %}
 	</div>
-</div>
-<a href="/edit/newUser">Ajouter un employé</a>
-<script src="script/script.js"></script>{% endblock %}<h1>Liste des employés</h1>
+
+	<script src="script/script.js"></script>
+{% endblock %}
+<h1>Liste des employés</h1>

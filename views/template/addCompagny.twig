@@ -1,17 +1,41 @@
 {% extends "main.twig" %}
-{% block style %}
-	<link rel="stylesheet" href="/css/addCompagny.css">
-{% endblock %}
 {% block header %}
-	<h1>ajouter une entreprise</h1>
+	<h1>Création de compte entreprise</h1>
 {% endblock %}
 {% block main %}
 	<form action="/addCompagny" method="POST">
-		<input type="text" id="name" name="name" placeholder="Nom de l'entreprise" required>
-		<input type="number" id="siret" name="siret" placeholder="Numéro siret" required>
-		<input type="email" id="mail" name="mail" placeholder="Email" required>
-		<input type="text" id="CEOName" name="CEOName" placeholder="Nom du directeur" required>
-		<input type="password" id="password" name="password" placeholder="password" required>
-		<button type="submit">valider</button>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="mail">Email</label>
+				<input type="email" class="form-control" id="mail" name="mail" placeholder="exemple@mail.fr" required>
+			</div>
+			<div class="form-group col-md-6">
+				<label for="password">Mot de passe</label>
+				<input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" required>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="siret">Numéro siret</label>
+			<input type="number" class="form-control" id="siret" name="siret" placeholder="000 000 000 00000" required>
+		</div>
+		<div class="form-group">
+			<label for="CEOName">Nom du directeur</label>
+			<input type="text" class="form-control" id="CEOName" name="CEOName" placeholder="Doe" required>
+		</div>
+		<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="name">Nom de l'entreprise</label>
+				<input type="text" class="form-control" name="name" id="name" placeholder="Entreprise" required>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="form-check">
+				<input class="form-check-input" type="checkbox" id="gridCheck" required>
+				<label class="form-check-label" for="gridCheck">
+					J'accepte les conditions d'utilisations (en gros on collecte tout pour revendre)
+				</label>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-primary">S'enregistrer</button>
 	</form>
 {% endblock %}
