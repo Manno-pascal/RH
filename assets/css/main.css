@@ -1,0 +1,63 @@
+#carte{
+    margin: 1vw;
+    padding: 1vw;
+    border: black 1px solid;
+    border-radius: 4vh;
+    text-align: center;
+    align-items: center;
+}
+
+
+body{
+    background-color: aquamarine;
+    text-align: center;
+}
+
+h1{
+    text-align: center;
+}
+
+.container{
+    text-align: center;
+    margin-top: 5vh;
+}
+
+#modal{
+    position:absolute;
+    top: 40vh;
+    left: 40vw;
+    background-color: aqua;
+    border: 1px solid black;
+    padding: 1vw;
+}
+
+.displayModal{
+    display: none;
+
+}
+
+.choice{
+    text-decoration: underline;
+    color: blue;
+}
+
+.buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.buttons > *{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 1vh;
+    height: 2vh;
+    background-color: antiquewhite;
+    border-radius: 1vh;
+    border: 1px solid black;
+}
+
+.buttons > *:hover{
+    background-color: bisque;
+}

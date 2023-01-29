@@ -1,0 +1,37 @@
+{% extends "main.twig" %}
+{% block header %}
+	<h1>Liste des employés</h1>
+{% endblock %}
+
+{% block main %}
+<a href="/disconnect">Déconnexion</a>
+	<div class="container">
+		<div class='row'>
+
+			{% for worker in workers %}
+				<div id="carte">
+					<p>Employé :{{worker.name}}</p>
+					<p>Photo :</p>
+					<img src="./images/{{worker.picture}}" alt="">
+					<p>Poste :{{worker.position}}</p>
+					<p>Nombre de blame :{{worker.warningNumber}}</p>
+					<div class="buttons">
+						<a href="/addBlame/{{worker._id}}">BLAMER !</a>
+						<div onclick="confirm()">Supprimer utilisateur</div>
+						<a class="choice" href="/edit/{{worker._id}}">Editer l'utilisateur</a>
+					</div>
+
+
+				</form>
+			</div>
+			<div id="modal" class="displayModal" onclick="confirm">
+				<p>Voulez-vous confirmer le ban ?</p>
+				<a class="choice" href="/delete/{{worker._id}}">
+					OUI</a>
+				<p onclick="confirm()" class="choice">NON</p>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+<a href="/edit/newUser">Ajouter un employé</a>
+<script src="script/script.js"></script>{% endblock %}<h1>Liste des employés</h1>

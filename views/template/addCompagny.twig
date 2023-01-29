@@ -1,0 +1,17 @@
+{% extends "main.twig" %}
+{% block style %}
+	<link rel="stylesheet" href="/css/addCompagny.css">
+{% endblock %}
+{% block header %}
+	<h1>ajouter une entreprise</h1>
+{% endblock %}
+{% block main %}
+	<form action="/addCompagny" method="POST">
+		<input type="text" id="name" name="name" placeholder="Nom de l'entreprise" required>
+		<input type="number" id="siret" name="siret" placeholder="Numéro siret" required>
+		<input type="email" id="mail" name="mail" placeholder="Email" required>
+		<input type="text" id="CEOName" name="CEOName" placeholder="Nom du directeur" required>
+		<input type="password" id="password" name="password" placeholder="password" required>
+		<button type="submit">valider</button>
+	</form>
+{% endblock %}
