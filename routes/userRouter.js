@@ -7,6 +7,9 @@ const CompagnyModel = require('../models/compagny.js')
 const userRouter = express.Router()
 const routeGuard = require('../customDependances/authGuard')
 const upload = require('../customDependances/multer')
+const crypt = require('../customDependances/bcrypt')
+
+
 
 userRouter.get('/', async (req, res) => {
    try {
@@ -30,7 +33,7 @@ userRouter.post('/login', async (req, res) => {
    try {
       let login = await CompagnyModel.findOne({ mail: req.body.mail })
       if (login) {
-         if (await bcrypt.compare(req.body.password, login.password)) {
+         if (await crypt.comparePassword(req.body.password, login.password)) {
             req.session.compagnyId = login._id
             res.redirect('/main')
          } else {
@@ -55,14 +58,10 @@ userRouter.get('/addCompagny', async (req, res) => {
 
 userRouter.post('/addCompagny', async (req, res) => {
    try {
-
-      bcrypt.hash(req.body.password, saltRounds, async function (err, hash) {
-         req.body.password = hash
-         let compagny = new CompagnyModel(req.body)
-         compagny.save()
-         res.redirect('/')
-      })
-
+      req.body.password = await crypt.cryptPassword(req.body.password)
+      let company = new CompagnyModel(req.body)
+      await company.save()
+      res.redirect('/')
    } catch (err) {
       console.log(err);
    }
@@ -98,9 +97,7 @@ userRouter.get('/edit/:id', routeGuard, async (req, res) => {
 
 userRouter.post('/addWorker', routeGuard, upload.single('picture'), async (req, res) => {
    try {
-
       req.body.picture = req.file.filename
-      req.body.compagnyId = req.session.compagnyId
       let worker = new WorkerModel(req.body)
       worker.save()
       await CompagnyModel.updateOne({ _id: req.session.compagnyId }, { $push: { workers: worker._id } })
@@ -124,7 +121,6 @@ userRouter.get('/delete/:id', routeGuard, async (req, res) => {
 
 userRouter.post('/edit/:id', routeGuard, upload.single('picture'), async (req, res) => {
    try {
-      console.log(req.file);
       if (req.file) {
          req.body.picture = req.file.filename
       }
@@ -143,8 +139,9 @@ userRouter.get('/addBlame/:id', routeGuard, async (req, res) => {
          res.redirect(`/delete/${req.params.id}`)
       } else {
          await WorkerModel.updateOne({ _id: req.params.id }, worker)
+         res.redirect('/main')
       }
-      res.redirect('/main')
+      
    } catch (err) {
       console.log(err);
    }

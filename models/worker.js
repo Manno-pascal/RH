@@ -17,10 +17,6 @@ const workerSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'Pas de blâme']
     },
-    compagnyId: {
-        type: String,
-        required: [true, "Pas d'id"]
-    },
 
 })
 

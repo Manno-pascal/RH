@@ -5,30 +5,30 @@
 {% block main %}
 	<form action="/addCompagny" method="POST">
 		<div class="form-row">
-			<div class="form-group col-md-6">
+			<div class="form-group col-md-6  mb-3">
 				<label for="mail">Email</label>
 				<input type="email" class="form-control" id="mail" name="mail" placeholder="exemple@mail.fr" required>
 			</div>
-			<div class="form-group col-md-6">
+			<div class="form-group col-md-6 mb-3">
 				<label for="password">Mot de passe</label>
 				<input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" required>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group mb-3">
 			<label for="siret">Numéro siret</label>
 			<input type="number" class="form-control" id="siret" name="siret" placeholder="000 000 000 00000" required>
 		</div>
-		<div class="form-group">
+		<div class="form-group mb-3">
 			<label for="CEOName">Nom du directeur</label>
 			<input type="text" class="form-control" id="CEOName" name="CEOName" placeholder="Doe" required>
 		</div>
-		<div class="form-row">
+		<div class="form-row mb-3">
 			<div class="form-group col-md-6">
 				<label for="name">Nom de l'entreprise</label>
 				<input type="text" class="form-control" name="name" id="name" placeholder="Entreprise" required>
 			</div>
 		</div>
-		<div class="form-group">
+		<div class="form-group mb-3">
 			<div class="form-check">
 				<input class="form-check-input" type="checkbox" id="gridCheck" required>
 				<label class="form-check-label" for="gridCheck">
